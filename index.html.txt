@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Solicitação de Uniforme</title>
+
+  <style>
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background: #f4f6f9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container{
+      background: #fff;
+      width: 100%;
+      max-width: 600px;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align: center;
+      margin-bottom: 25px;
+      color: #008f4c;
+      font-size: 28px;
+    }
+
+    .grupo{
+      margin-bottom: 18px;
+    }
+
+    label{
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input,
+    select{
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus{
+      outline: none;
+      border-color: #008f4c;
+      box-shadow: 0 0 5px rgba(0,143,76,0.3);
+    }
+
+    button{
+      width: 100%;
+      padding: 14px;
+      background: #008f4c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover{
+      background: #006b36;
+    }
+
+    .resultado{
+      margin-top: 20px;
+      background: #eefaf3;
+      border-left: 5px solid #008f4c;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+      white-space: pre-line;
+    }
+
+    #previewContainer{
+      display: none;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    #previewFoto{
+      width: 150px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Solicitação de Uniforme</h1>
+
+    <form id="formUniforme">
+
+      <div class="grupo">
+        <label>Nome do Colaborador</label>
+        <input type="text" id="nome" required>
+      </div>
+
+      <div class="grupo">
+        <label>Matrícula</label>
+        <input type="text" id="matricula" required>
+      </div>
+
+      <div class="grupo">
+        <label>Empresa</label>
+        <select id="empresa" required>
+          <option value="">Selecione</option>
+          <option value="SERVNAC">SERVNAC</option>
+          <option value="VERDE">VERDE</option>
+        </select>
+      </div>
+
+      <div class="grupo">
+        <label>Tamanho da Camisa</label>
+        <select id="camisa" required>
+          <option value="">Selecione</option>
+          <option>P</option>
+          <option>M</option>
+          <option>G</option>
+          <option>GG</option>
+          <option>XGG</option>
+        </select>
+      </div>
+
+      <div class="grupo">
+        <label>Tamanho da Calça</label>
+        <input type="number" id="calca" required>
+      </div>
+
+      <div class="grupo">
+        <label>Tamanho do Sapato/Cuturno</label>
+        <input type="number" id="sapato" required>
+      </div>
+
+      <div class="grupo">
+        <label>Tamanho da Capa do Colete</label>
+        <select id="colete" required>
+          <option value="">Selecione</option>
+          <option>P</option>
+          <option>M</option>
+          <option>G</option>
+          <option>GG</option>
+          <option>XGG</option>
+        </select>
+      </div>
+
+      <div class="grupo">
+        <label>Foto para Crachá</label>
+        <input type="file" id="foto" accept="image/*" required>
+      </div>
+
+      <div id="previewContainer">
+        <label>Pré-visualização da Foto</label>
+        <img id="previewFoto">
+      </div>
+
+      <button type="submit">Enviar Solicitação</button>
+
+    </form>
+
+    <div class="resultado" id="resultado"></div>
+
+  </div>
+
+  <script>
+
+    const form = document.getElementById('formUniforme');
+    const resultado = document.getElementById('resultado');
+
+    const fotoInput = document.getElementById('foto');
+    const previewFoto = document.getElementById('previewFoto');
+    const previewContainer = document.getElementById('previewContainer');
+
+    // PRÉ-VISUALIZAÇÃO DA FOTO
+
+    fotoInput.addEventListener('change', function(){
+
+      const arquivo = this.files[0];
+
+      if(arquivo){
+
+        const reader = new FileReader();
+
+        reader.onload = function(e){
+
+          previewFoto.src = e.target.result;
+          previewContainer.style.display = 'block';
+
+        }
+
+        reader.readAsDataURL(arquivo);
+
+      }
+
+    });
+
+    // ENVIO DO FORMULÁRIO
+
+    form.addEventListener('submit', function(e){
+
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const matricula = document.getElementById('matricula').value.trim();
+      const empresa = document.getElementById('empresa').value;
+      const camisa = document.getElementById('camisa').value;
+      const calca = document.getElementById('calca').value.trim();
+      const sapato = document.getElementById('sapato').value.trim();
+      const colete = document.getElementById('colete').value;
+      const foto = document.getElementById('foto').files[0];
+
+      // VALIDAÇÃO DOS CAMPOS
+
+      if(
+        nome === '' ||
+        matricula === '' ||
+        empresa === '' ||
+        camisa === '' ||
+        calca === '' ||
+        sapato === '' ||
+        colete === '' ||
+        !foto
+      ){
+
+        alert('Preencha todos os campos e anexe a foto do crachá antes de enviar.');
+
+        return;
+
+      }
+
+      // MENSAGEM DO WHATSAPP
+
+      const mensagem =
+`📋 *SOLICITAÇÃO DE UNIFORME*
+
+👤 *Nome:* ${nome}
+🆔 *Matrícula:* ${matricula}
+🏢 *Empresa:* ${empresa}
+
+👕 *Camisa:* ${camisa}
+👖 *Calça:* ${calca}
+🥾 *Sapato/Cuturno:* ${sapato}
+🦺 *Capa do Colete:* ${colete}
+
+📸 Foto para crachá anexada no formulário.
+
+Para realizar uma nova solicitação, acesse o sistema novamente.`;
+
+      // EXIBE RESULTADO NA TELA
+
+      resultado.style.display = 'block';
+
+      resultado.innerHTML =
+`SOLICITAÇÃO ENVIADA COM SUCESSO!
+
+Nome: ${nome}
+Matrícula: ${matricula}
+Empresa: ${empresa}
+
+Camisa: ${camisa}
+Calça: ${calca}
+Sapato/Cuturno: ${sapato}
+Capa do Colete: ${colete}`;
+
+      // NÚMERO DESTINO
+
+      const numero = '558598690200';
+
+      // ABRE WHATSAPP
+
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+      window.open(url, '_blank');
+
+      // LIMPA FORMULÁRIO
+
+      form.reset();
+
+      previewContainer.style.display = 'none';
+
+    });
+
+  </script>
+
+</body>
+</html>
