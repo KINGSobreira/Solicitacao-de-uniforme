@@ -141,6 +141,25 @@
       </div>
 
       <div class="grupo">
+        <label>Posto de Serviço</label>
+        <input type="text" id="posto" required>
+      </div>
+
+      <div class="grupo">
+        <label>Cidade do Posto</label>
+        <input type="text" id="cidade" required>
+      </div>
+
+      <div class="grupo">
+        <label>Tipo de Colaborador</label>
+        <select id="tipo" required>
+          <option value="">Selecione</option>
+          <option value="Fixo do Posto">Fixo do Posto</option>
+          <option value="Substituto de Férias">Substituto de Férias</option>
+        </select>
+      </div>
+
+      <div class="grupo">
         <label>Tamanho da Camisa</label>
         <select id="camisa" required>
           <option value="">Selecione</option>
@@ -194,6 +213,9 @@
       const nome = document.getElementById('nome').value.trim();
       const matricula = document.getElementById('matricula').value.trim();
       const empresa = document.getElementById('empresa').value;
+      const posto = document.getElementById('posto').value.trim();
+      const cidade = document.getElementById('cidade').value.trim();
+      const tipo = document.getElementById('tipo').value;
       const camisa = document.getElementById('camisa').value;
       const calca = document.getElementById('calca').value.trim();
       const sapato = document.getElementById('sapato').value.trim();
@@ -205,6 +227,9 @@
         nome === '' ||
         matricula === '' ||
         empresa === '' ||
+        posto === '' ||
+        cidade === '' ||
+        tipo === '' ||
         camisa === '' ||
         calca === '' ||
         sapato === '' ||
@@ -226,6 +251,10 @@
 🆔 *Matrícula:* ${matricula}
 🏢 *Empresa:* ${empresa}
 
+📍 *Posto de Serviço:* ${posto}
+🏙️ *Cidade do Posto:* ${cidade}
+👥 *Tipo:* ${tipo}
+
 👕 *Camisa:* ${camisa}
 👖 *Calça:* ${calca}
 🥾 *Sapato/Cuturno:* ${sapato}
@@ -245,6 +274,10 @@ Para realizar uma nova solicitação, acesse o sistema novamente.`;
 Nome: ${nome}
 Matrícula: ${matricula}
 Empresa: ${empresa}
+
+Posto: ${posto}
+Cidade: ${cidade}
+Tipo: ${tipo}
 
 Camisa: ${camisa}
 Calça: ${calca}
