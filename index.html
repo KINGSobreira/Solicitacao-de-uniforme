@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Solicitação de Uniformes</title>
+  <title>Solicitação de Uniforme</title>
 
   <style>
 
@@ -95,21 +95,6 @@
       white-space: pre-line;
     }
 
-    #previewContainer{
-      display: none;
-      margin-top: 15px;
-      text-align: center;
-    }
-
-    #previewFoto{
-      width: 150px;
-      height: 190px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 2px solid #ccc;
-      margin-top: 10px;
-    }
-
   </style>
 </head>
 
@@ -174,16 +159,6 @@
         </select>
       </div>
 
-      <div class="grupo">
-        <label>Foto para Crachá</label>
-        <input type="file" id="foto" accept="image/*" required>
-      </div>
-
-      <div id="previewContainer">
-        <label>Pré-visualização da Foto</label>
-        <img id="previewFoto">
-      </div>
-
       <button type="submit">Enviar Solicitação</button>
 
     </form>
@@ -197,35 +172,6 @@
     const form = document.getElementById('formUniforme');
     const resultado = document.getElementById('resultado');
 
-    const fotoInput = document.getElementById('foto');
-    const previewFoto = document.getElementById('previewFoto');
-    const previewContainer = document.getElementById('previewContainer');
-
-    // PRÉ-VISUALIZAÇÃO DA FOTO
-
-    fotoInput.addEventListener('change', function(){
-
-      const arquivo = this.files[0];
-
-      if(arquivo){
-
-        const reader = new FileReader();
-
-        reader.onload = function(e){
-
-          previewFoto.src = e.target.result;
-          previewContainer.style.display = 'block';
-
-        }
-
-        reader.readAsDataURL(arquivo);
-
-      }
-
-    });
-
-    // ENVIO DO FORMULÁRIO
-
     form.addEventListener('submit', function(e){
 
       e.preventDefault();
@@ -237,7 +183,6 @@
       const calca = document.getElementById('calca').value.trim();
       const sapato = document.getElementById('sapato').value.trim();
       const colete = document.getElementById('colete').value;
-      const foto = document.getElementById('foto').files[0];
 
       // VALIDAÇÃO DOS CAMPOS
 
@@ -248,17 +193,16 @@
         camisa === '' ||
         calca === '' ||
         sapato === '' ||
-        colete === '' ||
-        !foto
+        colete === ''
       ){
 
-        alert('Preencha todos os campos e anexe a foto do crachá antes de enviar.');
+        alert('Preencha todos os campos antes de enviar.');
 
         return;
 
       }
 
-      // MENSAGEM DO WHATSAPP
+      // MENSAGEM WHATSAPP
 
       const mensagem =
 `📋 *SOLICITAÇÃO DE UNIFORME*
@@ -272,11 +216,9 @@
 🥾 *Sapato/Cuturno:* ${sapato}
 🦺 *Capa do Colete:* ${colete}
 
-📸 Foto para crachá anexada no formulário.
-
 Para realizar uma nova solicitação, acesse o sistema novamente.`;
 
-      // EXIBE RESULTADO NA TELA
+      // EXIBE RESULTADO
 
       resultado.style.display = 'block';
 
@@ -294,7 +236,7 @@ Capa do Colete: ${colete}`;
 
       // NÚMERO DESTINO
 
-      const numero = '5585992250685';
+      const numero = '558598690200';
 
       // ABRE WHATSAPP
 
@@ -305,8 +247,6 @@ Capa do Colete: ${colete}`;
       // LIMPA FORMULÁRIO
 
       form.reset();
-
-      previewContainer.style.display = 'none';
 
     });
 
