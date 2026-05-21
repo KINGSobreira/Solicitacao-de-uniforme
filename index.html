@@ -160,6 +160,15 @@
       </div>
 
       <div class="grupo">
+        <label>Turno</label>
+        <select id="turno" required>
+          <option value="">Selecione</option>
+          <option value="Dia">Diurno</option>
+          <option value="Noite">Noturno</option>
+        </select>
+      </div>
+
+      <div class="grupo">
         <label>Tamanho da Camisa</label>
         <select id="camisa" required>
           <option value="">Selecione</option>
@@ -216,6 +225,7 @@
       const posto = document.getElementById('posto').value.trim();
       const cidade = document.getElementById('cidade').value.trim();
       const tipo = document.getElementById('tipo').value;
+      const turno = document.getElementById('turno').value;
       const camisa = document.getElementById('camisa').value;
       const calca = document.getElementById('calca').value.trim();
       const sapato = document.getElementById('sapato').value.trim();
@@ -230,6 +240,7 @@
         posto === '' ||
         cidade === '' ||
         tipo === '' ||
+        turno === '' ||
         camisa === '' ||
         calca === '' ||
         sapato === '' ||
@@ -254,6 +265,7 @@
 📍 *Posto de Serviço:* ${posto}
 🏙️ *Cidade do Posto:* ${cidade}
 👥 *Tipo:* ${tipo}
+🕒 *Turno:* ${turno}
 
 👕 *Camisa:* ${camisa}
 👖 *Calça:* ${calca}
@@ -278,6 +290,7 @@ Empresa: ${empresa}
 Posto: ${posto}
 Cidade: ${cidade}
 Tipo: ${tipo}
+Turno: ${turno}
 
 Camisa: ${camisa}
 Calça: ${calca}
@@ -286,7 +299,7 @@ Capa do Colete: ${colete}`;
 
       // NÚMERO DESTINO
 
-      const numero = '5585992250685';
+      const numero = '558598690200';
 
       // ABRE WHATSAPP
 
